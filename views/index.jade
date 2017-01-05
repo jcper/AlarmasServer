@@ -4,7 +4,7 @@ block content
   h1= title
    p#server-time
    script(type='text/javascript').
-     var HOST = "https://tranquil-retreat-11917.herokuapp.com"
+    var HOST = location.origin.replace(/^http/, 'ws');
       var ws = new WebSocket(HOST);
       var el = document.getElementById('server-time');
       ws.onmessage = function (event) {
