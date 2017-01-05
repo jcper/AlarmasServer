@@ -1,10 +1,11 @@
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
+var SocketServer = require('ws').Server;
 var alarma='';
 
-//var wss = new SocketServer({port: 8080});//modo local
-var wss = new SocketServer({port:8080});
+var wss = new SocketServer({port: 8080});
+
 router.get('/', function(req, res) {
   models.Equipos.findAll().then(function(equipos) {
     res.render('index', {
