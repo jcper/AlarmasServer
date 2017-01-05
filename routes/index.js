@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
   });
 });
 
-router.ws('/echo', function(ws, req) {
+router.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
     ws.send(msg);
     console.log(msg);
@@ -34,10 +34,10 @@ router.ws('/echo', function(ws, req) {
 
 
 
-setInterval(() => {
-  wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString()+ alarma);
-   });
-}, 1000);
+//setInterval(() => {
+ // wss.clients.forEach((client) => {
+  //  client.send(new Date().toTimeString()+ alarma);
+  // });
+//}, 1000);
 
 module.exports = router;
