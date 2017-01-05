@@ -5,7 +5,7 @@ block content
    p#server-time
    script(type='text/javascript').
       //var ws = new WebSocket("ws://localhost:8080/");//modo local
-      var HOST = https://tranquil-retreat-11917.herokuapp.com/
+      var HOST = "https://tranquil-retreat-11917.herokuapp.com/"
       var ws = new WebSocket(HOST);
       var el = document.getElementById('server-time');
       ws.onmessage = function (event) {
