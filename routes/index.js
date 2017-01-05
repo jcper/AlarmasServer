@@ -1,10 +1,10 @@
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
-var SocketServer = require('ws').Server;
+//var SocketServer = require('ws').Server;
 var alarma='';
-
-var wss = new SocketServer({port: 8080});
+var expressWs = require('express-ws')(express);
+//var wss = new SocketServer({port: 8080});
 
 router.get('/', function(req, res) {
   models.Equipos.findAll().then(function(equipos) {
@@ -15,14 +15,21 @@ router.get('/', function(req, res) {
   });
 });
 
-wss.on('connection', function(ws) {
-    ws.on('message', function(message) {
-        console.log('received: %s', message);
-       alarma="Alarma funcionando";
-
-    });
-    //ws.send('Alarma funcionando sin avisos');
+router.ws('/echo', function(ws, req) {
+  ws.on('message', function(msg) {
+    ws.send(msg);
+    console.log(msg);
+  });
 });
+
+//wss.on('connection', function(ws) {
+    //ws.on('message', function(message) {
+       // console.log('received: %s', message);
+      // alarma="Alarma funcionando";
+
+   // });
+    //ws.send('Alarma funcionando sin avisos');
+//});
 
 
 
