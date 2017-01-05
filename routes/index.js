@@ -1,26 +1,20 @@
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
+const path = require('path');
 var SocketServer = require('ws').Server;
 var alarma='';
-
-var wss = new SocketServer({port: 8080});
-
+var wss = new SocketServer({port:8080});
 router.get('/', function(req, res) {
   models.Equipos.findAll().then(function(equipos) {
     res.render('index', {
       title: 'Sistema integrado de alarmas SIA24',
-      equipos:equipos
+      equipos:equipos,
+      alarma:alarma
     });
   });
 });
 
-router.ws('/', function(ws, req) {
-  ws.on('message', function(msg) {
-    ws.send(msg);
-    console.log(msg);
-  });
-});
 
 wss.on('connection', function(ws) {
     ws.on('message', function(message) {
